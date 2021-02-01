@@ -1,0 +1,93 @@
+#root {
+    height: calc(100vh);
+    background: #020202;
+}
+
+.headerTitle {
+    width: 100%;
+    font-family: Impact !important;
+    color: #c00000 !important;
+    text-decoration: underline;
+    filter: blur(add=1,direction=135,strength=6);
+}
+
+.login > p {
+    color: #fff;
+    font-size: 12px;
+}
+
+.login-color_red {
+    color: #c00000 !important;
+}
+
+.login-logo_style {
+    width: 100%;
+    font-size: 35pt;
+    font-weight: 700;
+    font-family: Impact;
+    text-decoration: underline;
+    filter: blur(add=1,direction=135,strength=6);
+}
+
+.login-form_group label, .login-form_group p, .login-form_group input, .registry-form_group label, .registry-form_group p, .registry-form_group input {
+    color: #fff;
+}
+
+.login-form_show, .registry-form_show {
+    display: block;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.login-form_hidden, .registry-form_hidden {
+    display: none;
+}
+
+.login-form > div.alert, .registry-form > div.alert {
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.home-list {
+    margin-top: 30px;
+}
+
+.home-list_div {
+    float: left;
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+    background: #fff !important;
+    border-radius: 7px !important;
+    box-shadow: 5px 5px #b9b9b9;
+}
+
+.home-list_avatar {
+    float: left;
+    width: 55px !important;
+    height: 55px !important;
+    border-radius: 10px !important;
+}
+
+.home-list_content {
+    float: left;
+    padding-left: 13px;
+}
+
+.home-list_title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #03a9f4;
+}
+
+.home-list_datetime {
+    font-size: 12px;
+}
+
+.home-list_status_0, .home-list_status_1 {
+    font-size: 12px;
+}
+
+.home-list_status_1 {
+    color: rgb(255, 71, 71);
+    font-weight: 700;
+}
