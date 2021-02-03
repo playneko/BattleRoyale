@@ -3,6 +3,8 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session)
 const bodyParser = require('body-parser');
 const userRouter = require('./routes/user');
+const homeRouter = require('./routes/home');
+const fieldRouter = require('./routes/field');
 const port = process.env.PORT || 3001;
 
 const app = express();
@@ -20,6 +22,8 @@ app.use(bodyParser.json());
 
 // 라우터
 app.use('/user', userRouter);
+app.use('/home', homeRouter);
+app.use('/field', fieldRouter);
 
 // 서버 활성화
 app.listen(port, ()=>{

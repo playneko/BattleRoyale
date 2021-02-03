@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import axios from 'axios'
 
-const SessionModel = (setIsLogin) => {
+const SessionModel = (isLogin, setIsLogin) => {
     // 메인 리스트 취득
     const fetchDatas = async () => {
         try {
@@ -10,8 +10,8 @@ const SessionModel = (setIsLogin) => {
             .catch(function (error) {
                 console.log(error);
             });
-            if (response.data.isLogin) {
-                setIsLogin(true);
+            if (response.data.auth) {
+                setIsLogin(response.data);
             }
         } catch (e) {
             console.log(e);
@@ -20,7 +20,7 @@ const SessionModel = (setIsLogin) => {
 
     useEffect(() => {
         fetchDatas();
-    }, []);
+    }, [isLogin]);
 }
 
 export default SessionModel;

@@ -59,7 +59,7 @@ const Login = (props) => {
 
   const handleOnRedirect = () => {
     props.params(true);
-    history.push("/");
+    history.push("/home");
   };
 
   // 로그인 성공의 경우
@@ -70,20 +70,19 @@ const Login = (props) => {
   return (
     <div className="login">
       <p>신세기의 시작. 한 나라가 무너졌다.</p>
-      <p>완전실업률 15% 돌파. 실업자 1천만 명. 등교거부 학생 80만 명.</p>
+      <p>완전실업률 15% 돌파. 실업자 1천만명. 등교거부 학생 80만명.</p>
       <p>급증하는 소년 범죄!</p>
       <p>자신을 잃은 어른들은 아이들을 두려워해, 결국, 하나의 법안을 가결했다.</p>
-      <p className="login-color_red">『신세기 교육개혁법 【통칭 BR 법】』</p>
-      <p>전국의 중학교 3학년 중 무작위로 한 반을 선별.</p>
-      <p><span className="login-color_red">『최후의 한 명』</span>이 남을 때까지 싸운다.</p>
-      <p>끝까지 살아남는 학생만이 집으로 돌아갈 수 있다는<span className="login-color_red">『살인게임』</span>이었다...</p>
+      <p className="login-color_red">『신세기 교육 개혁법 【통칭 BR 법】』</p>
+      <p>전국의 중학교 3학년 중 무작위로 한반을 선별.</p>
+      <p><span className="login-color_red">『최후의 한명』</span>이 남을 때까지 싸운다.</p>
+      <p>끝까지 살아남는 학생만이 집으로 돌아갈수 있다는<span className="login-color_red">『살인게임』</span>이었다...</p>
       <p className="login-color_red">
         <span className="login-logo_style">Battle Royale</span>
-        <font face="Impact" color="#c00000" size="10"></font>
       </p>
       <div className="login-form">
         <form onSubmit={handleOnSubmit} className="login-form_group">
-          {users != null && users.errors ? <Alert severity="error">IDまたは、パスワードを確認して下さい。</Alert> : ""}
+          { error || (users != null && users.errors) ? <Alert severity="error">IDまたは、パスワードを確認して下さい。</Alert> : "" }
           <TextField
             label="ID"
             id="margin-normal"

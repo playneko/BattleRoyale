@@ -3,6 +3,10 @@
     background: #020202;
 }
 
+.main {
+    margin-top: 45px;
+}
+
 .headerTitle {
     width: 100%;
     font-family: Impact !important;
@@ -48,8 +52,26 @@
     margin-left: 25px;
 }
 
-.home-list {
-    margin-top: 30px;
+.home-color_red {
+    text-align: center;
+    color: #c00000 !important;
+}
+
+.home-title_style {
+    font-size: 22pt;
+    font-weight: 700;
+    font-family: Impact;
+    text-decoration: underline;
+}
+
+.home-avatar_content {
+    line-height: 1.2;
+    padding-left: 70px;
+}
+
+.home-avatar_content > span {
+    font-size: 13px;
+    color: #ffffff !important;
 }
 
 .home-list_div {
@@ -90,4 +112,64 @@
 .home-list_status_1 {
     color: rgb(255, 71, 71);
     font-weight: 700;
+}
+
+.home-list {
+    text-align: center;
+}
+
+.progress {
+    margin: 0 auto;
+    color: rgb(255, 71, 71) !important;
+}
+
+.transfer-form {
+    padding: 25px;
+    border-radius: 7px;
+    background: #e0e0e0;
+    /* width: calc(100vw - 10vw); */
+}
+
+.transfer-form_character > label > img {
+    border-radius: 7px;
+}
+
+.transfer-form_username {
+    padding-top: 10px;
+}
+
+.transfer-form_usersex {
+    padding-top: 10px;
+}
+
+.transfer-button {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.transfer-error {
+    margin-bottom: 10px;
+}
+
+.field-transfer_form {
+    padding: 25px;
+    font-size: 13px;
+    text-align: left;
+    border-radius: 7px;
+    background: #e0e0e0;
+}
+
+.field-transfer_character > img {
+    border-radius: 7px;
+}
+
+.field-transfer_success_content > p {
+    font-size: 13px;
+    color: #ffffff !important;
+}
+
+.field-transfer_success_button {
+    font-weight: 900 !important;
+    background-color: #ff3131 !important;
+    color: rgb(255 255 255 / 87%) !important;
 }

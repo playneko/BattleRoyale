@@ -71,6 +71,7 @@ const Header = (props) => {
   const theme = useTheme();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const userData = props.params;
 
   // 네비게이션 열기
   const handleDrawerOpen = () => {
@@ -121,7 +122,7 @@ const Header = (props) => {
         </div>
         <div className={classes.toolbar} />
         <Divider />
-        <Navibar />
+        <Navibar params={userData} />
       </Drawer>
     </div>
   );

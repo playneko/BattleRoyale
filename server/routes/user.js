@@ -6,13 +6,31 @@ const router = express.Router();
 // 로그인 유무체크
 router.get('/isLogin', (req, res) => {
     let isLogin = false;
+    let userNo = 0;
+    let userId = "";
+    let userName = "";
+    let userImage = "";
+    let userDate = "";
+    let character = null;
     if (req.session.isLogin === undefined) {
         isLogin = false;
     } else {
         isLogin = true;
+        userNo = req.session.no;
+        userId = req.session.user_id;
+        userName = req.session.user_name;
+        userImage = req.session.user_image;
+        userDate = req.session.user_joindate;
+        character = req.session.character;
     }
     res.json({
-        isLogin: isLogin
+        auth: isLogin,
+        userNo: userNo,
+        userId: userId,
+        userName: userName,
+        userImage: userImage,
+        userDate: userDate,
+        character: character
     })
 });
 
@@ -28,10 +46,11 @@ router.post('/login', [
 
     const body = req.body;
     let sql = "";
-    sql += " SELECT count(*) as cnt ";
+    sql += " SELECT no, user_id, user_name, user_image, user_joindate ";
     sql += " FROM game_member ";
     sql += " WHERE user_id = ? ";
     sql += " AND user_pass = ? ";
+    sql += " LIMIT 0, 1 ";
     let params = [body.userId, body.userPw];
 
     connection.query(sql, params, (error, rows, fields) => {
@@ -40,11 +59,15 @@ router.post('/login', [
             return res.status(500).json({ errors: errors });
         } else {
             const result = rows[0];
-            if (result.cnt < 1) {
+            if (!rows[0] || result.no < 1) {
                 return res.status(400).json({ errors: [{msg: "아이디 또는 비밀번호가 일치하지 않습니다."}] });
             } else {
                 req.session.isLogin = true;
-                req.session.userId = body.userId;
+                req.session.no = result.no;
+                req.session.user_id = result.user_id;
+                req.session.user_name = result.user_name;
+                req.session.user_image = result.user_image;
+                req.session.user_joindate = result.user_joindate;
                 res.json({
                     success: true
                 })
@@ -75,12 +98,13 @@ router.post('/registry', [
     const body = req.body;
     let sql = "";
     sql += " INSERT INTO game_member ";
-    sql += " (no, user_id, user_pass, user_name, user_joindate) ";
-    sql += " VALUES(0, ?, ?, ?, now()) ";
+    sql += " (no, user_id, user_pass, user_name, user_image, user_joindate) ";
+    sql += " VALUES(0, ?, ?, ?, ?, now()) ";
     let params = [
         body.userId,
         body.userPw,
-        body.userName
+        body.userName,
+        '/character/000.png'
     ];
 
     connection.query(sql, params, (error, rows, fields) => {
