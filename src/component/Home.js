@@ -35,7 +35,7 @@ const Home = () => {
 
   // 게임 필드로 이동
   const handleOnGameStart = (fieldNo) => {
-    history.push("/field/" + fieldNo);
+    history.push("/switch/" + fieldNo);
   };
 
   return (
@@ -58,7 +58,7 @@ const Home = () => {
               </ListItemAvatar>
             </ListItem>
           ))
-        : ""
+        : error == null && (loading == null || loading === false) ? <CircularProgress disableShrink className="progress" /> : ""
       }
       </List>
       { loading != null && loading === true ? <CircularProgress disableShrink className="progress" /> : "" }

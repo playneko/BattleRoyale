@@ -79,19 +79,48 @@ router.post('/transfer', [
         body.charSex,
         body.charIcon
     ];
-    console.log(params);
 
     connection.query(sql, params, (error, rows, fields) => {
         if (error) {
-            // console.log(error);
             const errors = [{msg: "등록중 에러가 발생했습니다."}];
             return res.status(500).json({ errors: errors });
         } else {
-            // console.log(rows.insertId);
             res.json({
                 success: true,
                 insertId: rows.insertId
             })
+        }
+    });
+});
+
+// 수학여행 출발 처리
+router.post('/transferUpdate', [
+    body('no').not().isEmpty().trim().escape().withMessage('데이터에 오류가 있습니다.'),
+    body('gameNo').not().isEmpty().trim().escape().withMessage('데이터에 오류가 있습니다.'),
+    body('userId').not().isEmpty().trim().escape().withMessage('데이터에 오류가 있습니다.')
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const body = req.body;
+    let sql = "";
+    sql += " UPDATE game_character ";
+    sql += " SET char_field = ? ";
+    sql += " WHERE no = ? AND game_no = ? AND user_id = ? ";
+    let params = [2, body.no, body.gameNo, body.userId];
+
+    connection.query(sql, params, (error, rows, fields) => {
+        if (error) {
+            const errors = [{msg: "처리중 에러가 발생했습니다."}];
+            return res.status(500).json({ errors: errors });
+        } else {
+            req.session.character.char_field = 2;
+            res.json({
+                success: true
+            })
+            console.log(req.session);
         }
     });
 });

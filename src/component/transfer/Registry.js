@@ -15,13 +15,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // 컴포넌트
 // 모델
-import TransferModel from "../models/TransferModel";
+import TransferModel from "../../models/TransferModel";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} className="transfer-error" />;
 }
 
-const Transfer = (props) => {
+const Registry = (props) => {
   let { id } = useParams();
   let history = useHistory();
   const [character, setCharacter] = React.useState({iconName: "남자1번", iconVal: "0", charIcon: "0.jpg", charSex: "1"});
@@ -82,7 +82,7 @@ const Transfer = (props) => {
   }
 
   if (result != null && result.success === true) {
-    history.push("/field/" + id);
+    history.push("/switch/" + id);
   }
 
   return (
@@ -147,4 +147,4 @@ const Transfer = (props) => {
   );
 }
 
-export default Transfer;
+export default Registry;

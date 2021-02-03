@@ -13,12 +13,12 @@ const HomeModel = ({setLists, setError, setLoading}) => {
             // POST 전송
             let response = await axios.post('/home/lists')
             .catch(function (error) {
-                setError(error);
+                setError({error:error});
             });
             // 데이터는 response.data 안에 들어있습니다.
             setLists(response.data);
         } catch (e) {
-            setError(e);
+            setError({error:e});
         }
         setLoading(false);
     };

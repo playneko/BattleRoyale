@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import axios from 'axios'
 
 const RegistryModel = ({account, setUsers, setError, setLoading}) => {
-
     const fetchDatas = async () => {
         try {
             // 요청이 시작 할 때에는 error 와 users 를 초기화하고

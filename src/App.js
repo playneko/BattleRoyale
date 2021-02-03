@@ -26,8 +26,16 @@ import Rank from "./component/Rank";
 import Board from "./component/Board";
 // 게임 필드
 import Field from "./component/Field";
-// 전학 수속
-import Transfer from "./component/Transfer";
+// 전학수속 접수
+import TransferRegistry from "./component/transfer/Registry";
+// 전학수속 갱신
+import TransferUpdate from "./component/transfer/Update";
+// 전학수속 완료
+import TransferSuccess from "./component/transfer/Success";
+// 페이지 스위치
+import SwitchPage from "./component/SwitchPage";
+// 404 NotFound
+import NotFound from "./component/NotFound";
 // 모델
 import SessionModel from "./models/SessionModel";
 // CSS
@@ -102,16 +110,23 @@ function App() {
           <Typography paragraph>
             <Switch>
             {
+              account.auth ? <Route exact path="/" render={() => <NotFound />} /> : ""
+            }
+            {
               account.auth ? <Route path="/home" render={() => <Home />} /> : account.auth === false ? <Route exact path="/" render={() => <Login params={handleOnLoginout} />} /> : ""
             }
+            <Route path="/switch/:id" render={() => <SwitchPage params={{account: account, isLogin: isLogin, setIsLogin: setIsLogin}} />} />
             <Route path="/user/registry" render={() => <Registry />} />
             <Route path="/user/logout" render={() => <Logout params={handleOnLoginout} />} />
-            <Route path="/transfer/:id" render={() => <Transfer params={account} />} />
+            <Route path="/transfer/register/:id" render={() => <TransferRegistry params={account} />} />
+            <Route path="/transfer/update/:id" render={() => <TransferUpdate params={account} />} />
+            <Route path="/transfer/success/:id" render={() => <TransferSuccess params={account} />} />
             <Route path="/field/:id" render={() => <Field params={account} />} />
             <Route path="/life" render={() => <Life />} />
             <Route path="/news" render={() => <News />} />
             <Route path="/rank" render={() => <Rank />} />
             <Route path="/board" render={() => <Board />} />
+            <Route path="/404" render={() => <NotFound />} />
             </Switch>
           </Typography>
         </main>

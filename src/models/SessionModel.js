@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import axios from 'axios'
 
-const SessionModel = (isLogin, setIsLogin) => {
+const SessionModel = (isLogin, setAccount) => {
     // 메인 리스트 취득
     const fetchDatas = async () => {
         try {
@@ -11,7 +11,7 @@ const SessionModel = (isLogin, setIsLogin) => {
                 console.log(error);
             });
             if (response.data.auth) {
-                setIsLogin(response.data);
+                setAccount(response.data);
             }
         } catch (e) {
             console.log(e);

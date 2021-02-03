@@ -4,8 +4,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // 컴포넌트
-// 페이지 스위칭
-import SwithMap from "./SwitchPage";
 // 모델
 import CharacterModel from "../models/CharacterModel";
 
@@ -13,61 +11,49 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const Field = (props) => {
+// 필드값을 체크해서 페이지 전이
+const SwitchPage = (props) => {
   // URL 아이디값
   let { id } = useParams();
   let history = useHistory();
+
   // 캐릭터 데이터
   const [charData, setCharData] = React.useState(null);
-  // 필드 데이터
-  const [fieldData, setFieldData] = React.useState(null);
   // 에러
   const [error, setError] = React.useState(null);
   // 로딩
   const [loading, setLoading] = React.useState(false);
   // 계정 정보
-  const account = props.params;
+  const account = props.params.account;
+  // 로그인 체크
+  const isLogin = props.params.isLogin;
+  const setIsLogin = props.params.setIsLogin;
 
   // 캐릭터와 필드정보 취득
-  CharacterModel({id, account, setCharData, setFieldData, setError, setLoading});
+  CharacterModel({id, account, setCharData, setError, setLoading});
 
-  // 전학수속으로 이동
-  const handleOnTransfer = () => {
+  // 전학 수속
+  if (charData != null && charData.success === false) {
     history.push("/transfer/register/" + id);
-  };
+  } else if (charData != null && charData.success === true) {
+    const data = charData.data[0];
 
-  // 전학수속 체크
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      if (charData != null && charData.success === false) {
-        handleOnTransfer(id);
-      }
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+    // 로그인 정보 갱신
+    setIsLogin(isLogin + 1);
+
+    if (data.char_field === 1) {
+      history.push("/transfer/update/" + id);
+    } else if (data.char_field === 2) {
+      history.push("/transfer/success/" + id);
+    }
+  }
 
   return (
     <div className="home-list">
       { error != null ? <Alert severity="error">{error.msg}</Alert> : "" }
       { loading != null && loading === true ? <CircularProgress disableShrink className="progress" /> : "" }
-      {
-        charData != null && charData.success === true ?
-          <SwithMap>
-          {{
-            charData: charData,
-            fieldData: fieldData,
-            setCharData: setCharData,
-            setFieldData: setFieldData,
-            setError: setError,
-            setLoading: setLoading
-          }}
-          </SwithMap>
-        : ""
-      }
     </div>
   );
 }
 
-export default Field;
+export default SwitchPage;

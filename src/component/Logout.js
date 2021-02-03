@@ -18,7 +18,7 @@ const Logout = (props) => {
   const [loading, setLoading] = React.useState(false);
 
   // 로그아웃 처리
-  LogoutModel({props, setUsers, setError, setLoading});
+  LogoutModel({setUsers, setError, setLoading});
 
   const handleOnRedirect = () => {
     props.params(false);
