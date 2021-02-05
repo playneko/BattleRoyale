@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const TransferUpdateModel = ({no, gameNo, userId, setResult, setError, setLoading}) => {
+const TransferSuccessModel = ({no, gameNo, userId, setResult, setError, setLoading}) => {
     const fetchDatas = async () => {
         try {
             // 요청이 시작 할 때에는 error를 초기화하고
@@ -13,7 +13,7 @@ const TransferUpdateModel = ({no, gameNo, userId, setResult, setError, setLoadin
                 no: no,
                 gameNo: gameNo,
                 userId: userId,
-                fieldNo: 2
+                fieldNo: 3
             })
             .catch(function (error) {
                 setError({msg: "데이터 처리중 에러가 발생 했습니다."});
@@ -30,4 +30,4 @@ const TransferUpdateModel = ({no, gameNo, userId, setResult, setError, setLoadin
     fetchDatas();
 }
 
-export default TransferUpdateModel;
+export default TransferSuccessModel;

@@ -14,7 +14,7 @@ const TransferModel = ({charData, setResult, setError, setLoading}) => {
                 setLoading(true);
 
                 // POST 전송
-                response = await axios.post('/field/transfer', {
+                response = await axios.post('/transfer/transfer', {
                     gameNo: charData.gameNo,
                     userId: charData.userId,
                     charIcon: charData.charIcon,

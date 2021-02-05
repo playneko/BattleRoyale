@@ -25,7 +25,7 @@ import Rank from "./component/Rank";
 // 게시판
 import Board from "./component/Board";
 // 게임 필드
-import Field from "./component/Field";
+import Field from "./component/fields/Field";
 // 전학수속 접수
 import TransferRegistry from "./component/transfer/Registry";
 // 전학수속 갱신
@@ -121,12 +121,13 @@ function App() {
             <Route path="/transfer/register/:id" render={() => <TransferRegistry params={account} />} />
             <Route path="/transfer/update/:id" render={() => <TransferUpdate params={account} />} />
             <Route path="/transfer/success/:id" render={() => <TransferSuccess params={account} />} />
-            <Route path="/field/:id" render={() => <Field params={account} />} />
+            <Route path="/field/map" render={() => <Field params={account} />} />
             <Route path="/life" render={() => <Life />} />
             <Route path="/news" render={() => <News />} />
             <Route path="/rank" render={() => <Rank />} />
             <Route path="/board" render={() => <Board />} />
             <Route path="/404" render={() => <NotFound />} />
+            <Route path="*" render={() => <NotFound />} />
             </Switch>
           </Typography>
         </main>

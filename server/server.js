@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const userRouter = require('./routes/user');
 const homeRouter = require('./routes/home');
 const fieldRouter = require('./routes/field');
+const transferRouter = require('./routes/transfer');
 const port = process.env.PORT || 3001;
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/home', homeRouter);
 app.use('/field', fieldRouter);
+app.use('/transfer', transferRouter);
 
 // 서버 활성화
 app.listen(port, ()=>{

@@ -3,6 +3,10 @@
     background: #020202;
 }
 
+#map_image, #icon_image {
+    display: none;
+}
+
 .main {
     margin-top: 45px;
     background: #020202;
@@ -197,6 +201,89 @@
     font-weight: 900;
     font-size: 20px !important;
     color: #ff3131 !important;
+}
+
+.field-transfer_success_alert {
+    z-index: 999;
+    position: fixed;
+    width: calc(100vw - 10vw);
+}
+
+.field-map {
+    margin: 0 auto;
+}
+
+.field-map_div {
+    clear: both;
+}
+
+.field-map_view {
+    width: 170px;
+    height: 170px;
+}
+
+.field-map_color_red {
+    text-align: center;
+    color: #c00000 !important;
+}
+
+.field-map_title_style {
+    font-size: 17pt;
+    font-weight: 700;
+    font-family: Impact;
+    text-decoration: underline;
+}
+
+.field-map_footer {
+    bottom: 0;
+    width: calc(100vw - 10vw);
+    z-index: 99;
+    max-width: 100%;
+    position: fixed !important;
+    color: #080808 !important;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background: #ffffff !important;
+}
+
+.field-map_status_character {
+    float: left;
+    text-align: left;
+}
+
+.field-map_status_character > img {
+    border-radius: 7px;
+}
+
+.field-map_status_info {
+    float: left;
+    font-size: 13px;
+    text-align: left;
+    color: #ffffff;
+    padding-left: 15px;
+    width: calc(100vw - 50vw);
+}
+
+.field-map_status_info > div {
+    clear: both;
+}
+
+.field-map_status_info span {
+    float: left;
+    width: 50px;
+    text-align: left;
+}
+
+.field-map_status_info_text {
+    color: #ffffff;
+}
+
+.field-map_status_info_background_red > div {
+    background-color: #ff3131;
+}
+
+.field-map_status_info_background_yellow > div {
+    background-color: #e2c418;
 }
 
 .notfound-avatar_content {

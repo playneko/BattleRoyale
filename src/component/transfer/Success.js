@@ -8,9 +8,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // 컴포넌트
 // 로그인 체크
 import CheckLogin from "../CheckLogin";
+// 모델
+import TransferSuccessModel from "../../models/TransferSuccessModel";
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant="filled" {...props} className="field-transfer_success_alert" />;
 }
 
 const Success = (props) => {
@@ -26,8 +28,17 @@ const Success = (props) => {
   // 로딩
   const [loading, setLoading] = React.useState(false);
 
-  console.log(props);
   CheckLogin(account, 2);
+
+  // 교실에서 나가기
+  const handleOnTransferSuccess = (no, gameNo, userId) => {
+    // 캐릭터 정보 갱신
+    TransferSuccessModel({no, gameNo, userId, setResult, setError, setLoading});
+  };
+
+  if (result != null && result.success === true) {
+    history.push("/switch/" + id);
+  }
 
   if (account != null && account.auth === true) {
     return (
@@ -82,7 +93,7 @@ const Success = (props) => {
           <p>아, 아빠 엄마에게 이미 말해뒀으니까 맘편히 싸우세요.</p>
         </div>
         <div className="field-transfer_success_button">
-          <Button variant="contained" color="warning" type="button">
+          <Button variant="contained" color="warning" type="button" onClick={() => handleOnTransferSuccess(character.no, id, character.user_id)}>
             교실에서 나간다
           </Button>
         </div>

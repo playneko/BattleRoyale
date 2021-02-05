@@ -45,6 +45,8 @@ const SwitchPage = (props) => {
       history.push("/transfer/update/" + id);
     } else if (data.char_field === 2) {
       history.push("/transfer/success/" + id);
+    } else if (data.char_field === 3) {
+      history.push("/field/map/");
     }
   }
 
