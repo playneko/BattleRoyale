@@ -81,6 +81,37 @@ router.post('/mapdata', (req, res) => {
     });
 });
 
+// 맵 이동 처리
+router.post('/mapmove', [
+    body('gameNo').not().isEmpty().trim().escape().withMessage('데이터에 오류가 있습니다.'),
+    body('userId').not().isEmpty().trim().escape().withMessage('데이터에 오류가 있습니다.'),
+    body('mapCode').not().isEmpty().trim().escape().withMessage('데이터에 오류가 있습니다.')
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const body = req.body;
+    let sql = "";
+    sql += " UPDATE game_character ";
+    sql += " SET map_code = ? ";
+    sql += " WHERE game_no = ? AND user_id = ? ";
+    let params = [body.mapCode, body.gameNo, body.userId];
+
+    connection.query(sql, params, (error, rows, fields) => {
+        if (error) {
+            const errors = [{msg: "처리중 에러가 발생했습니다."}];
+            return res.status(500).json({ errors: errors });
+        } else {
+            req.session.character.char_field = body.mapCode;
+            res.json({
+                success: true
+            })
+        }
+    });
+});
+
 connection.end;
 
 module.exports = router;

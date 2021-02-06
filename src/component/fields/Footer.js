@@ -13,13 +13,19 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 // 컴포넌트
 // 공통 처리
 import IsEmpty from "../common/IsEmpty";
+// 모델
+import CompasModel from "../../models/CompasModel";
 
-const compasButton = (iconNumber, compasCode, compasName) => {
+const compasButton = (iconNumber, compasCode, compasName, setMoveMap) => {
+  const moveMap = () => {
+    setMoveMap(compasCode);
+  }
+
   return (
     <>
     {
       !IsEmpty(compasCode) ?
-        <ListItem button>
+        <ListItem button onClick={() => moveMap()}>
           <ListItemIcon>
             { iconNumber === 1 ? <KeyboardArrowRight /> : "" }
             { iconNumber === 2 ? <KeyboardArrowLeft /> : "" }
@@ -47,15 +53,26 @@ const ListItemButton = (iconNumber, text) => {
 }
 
 const Footer = (props) => {
-  const mapData = props.children.data[0];
+  const mapData = props.mapData.data[0];
+  const setMoveCheck = props.setMoveCheck;
+  // 맵 데이터
+  const [moveMap, setMoveMap] = React.useState(mapData.map_code);
+  // 에러
+  const [error, setError] = React.useState(null);
+  // 로딩
+  const [loading, setLoading] = React.useState(false);
+
+  // 필드 이동
+  CompasModel({mapData, moveMap, setMoveCheck, setError, setLoading});
+  console.log(moveMap);
 
   return (
     <>
       <List component="nav" className="field-map_footer">
-      { compasButton(1, mapData.move_east, "동쪽으로 이동하기") }
-      { compasButton(2, mapData.move_west, "서쪽으로 이동하기") }
-      { compasButton(3, mapData.move_south, "남쪽으로 이동하기") }
-      { compasButton(4, mapData.move_north, "북쪽으로 이동하기") }
+      { compasButton(1, mapData.move_east, "동쪽으로 이동하기", setMoveMap) }
+      { compasButton(2, mapData.move_west, "서쪽으로 이동하기", setMoveMap) }
+      { compasButton(4, mapData.move_north, "북쪽으로 이동하기", setMoveMap) }
+      { compasButton(3, mapData.move_south, "남쪽으로 이동하기", setMoveMap) }
       { ListItemButton(1, "탐색하기") }
       { ListItemButton(2, "소지품") }
       </List>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 import MuiAlert from '@material-ui/lab/Alert';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -27,7 +28,20 @@ const iconList = [
 ];
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  const handleOnReload = () => {
+    props.setReload(props.reload + 1);
+  }
+
+  return (
+    <>
+      <MuiAlert elevation={6} variant="filled" {...props} />
+      <div className="filed-map_reload_button">
+        <Button variant="contained" color="warning" type="button" onClick={handleOnReload}>
+          리로드
+        </Button>
+      </div>
+    </>
+  );
 }
 
 function LinearProgressWithLabel(props) {
@@ -176,19 +190,23 @@ const Field = (props) => {
 
   // 맵 데이터
   const [mapData, setMapData] = React.useState({});
+  // 로딩
+  const [reload, setReload] = React.useState(0);
   // 에러
   const [error, setError] = React.useState(null);
   // 로딩
   const [loading, setLoading] = React.useState(false);
+  // 이동 처리 체크
+  const [moveCheck, setMoveCheck] = React.useState(!IsEmpty(mapData) && !IsEmpty(mapData.data) ? mapData.data.map_code : "");
 
   CheckLogin(account, 3);
 
   // 캐릭터와 필드정보 취득
-  MapModel({character, setMapData, setError, setLoading});
+  MapModel({moveCheck, character, reload, setMapData, setError, setLoading});
 
   return (
     <div className="home-list">
-      { !IsEmpty(error) ? <Alert severity="error">{error.msg != null ? error.msg : "데이터 취득중 에러가 발생했습니다."}</Alert> : "" }
+      { !IsEmpty(error) ? <Alert severity="error" reload={reload} setReload={setReload}>{error.msg != null ? error.msg : "데이터 취득중 에러가 발생했습니다."}</Alert> : "" }
       { !IsEmpty(loading) && loading === true ? <CircularProgress disableShrink className="progress" /> : "" }
       {
         !IsEmpty(mapData) && !IsEmpty(mapData.data) ?
@@ -202,7 +220,7 @@ const Field = (props) => {
       }
       {
         !IsEmpty(mapData) && !IsEmpty(mapData.data) ?
-          <Footer>{mapData}</Footer>
+          <Footer mapData={mapData} setMoveCheck={setMoveCheck} />
         : ""
       }
       <img id="map_image" src="/map.jpg" />

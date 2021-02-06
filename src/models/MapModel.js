@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import axios from 'axios'
 
-const MapModel = ({character, setMapData, setError, setLoading}) => {
+const MapModel = ({moveCheck, character, reload, setMapData, setError, setLoading}) => {
     const fetchDatas = async () => {
         try {
             // 요청이 시작 할 때에는 error 와 Data 를 초기화하고
             setError(null);
             setMapData(null);
-
             // loading 상태를 true 로 바꿉니다.
             setLoading(true);
 
@@ -30,7 +29,7 @@ const MapModel = ({character, setMapData, setError, setLoading}) => {
 
     useEffect(() => {
         fetchDatas();
-    }, []);
+    }, [moveCheck, reload]);
 }
 
 export default MapModel;

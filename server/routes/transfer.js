@@ -71,7 +71,6 @@ router.post('/transferUpdate', [
             res.json({
                 success: true
             })
-            console.log(req.session);
         }
     });
 });

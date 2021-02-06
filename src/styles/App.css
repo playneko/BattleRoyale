@@ -286,6 +286,10 @@
     background-color: #e2c418;
 }
 
+.filed-map_reload_button {
+    padding-top: 15px;
+}
+
 .notfound-avatar_content {
     line-height: 1.2;
     padding-left: 70px;

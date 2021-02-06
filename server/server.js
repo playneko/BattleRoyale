@@ -10,6 +10,8 @@ const port = process.env.PORT || 3001;
 
 const app = express();
 
+// app.use(cors());
+
 // 세션정보 생성
 app.use(session({
     secret: 'abcdefgh!@#!@#ijklmnopq',
