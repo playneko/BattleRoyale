@@ -64,7 +64,6 @@ const Footer = (props) => {
 
   // 필드 이동
   CompasModel({mapData, moveMap, setMoveCheck, setError, setLoading});
-  console.log(moveMap);
 
   return (
     <>
@@ -73,8 +72,8 @@ const Footer = (props) => {
       { compasButton(2, mapData.move_west, "서쪽으로 이동하기", setMoveMap) }
       { compasButton(4, mapData.move_north, "북쪽으로 이동하기", setMoveMap) }
       { compasButton(3, mapData.move_south, "남쪽으로 이동하기", setMoveMap) }
-      { ListItemButton(1, "탐색하기") }
-      { ListItemButton(2, "소지품") }
+      { mapData.prohibition_area < 1 ? ListItemButton(1, "탐색하기") : "" }
+      { mapData.prohibition_area < 1 ? ListItemButton(2, "소지품") : "" }
       </List>
     </>
   );

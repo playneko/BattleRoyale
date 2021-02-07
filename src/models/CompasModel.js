@@ -31,7 +31,9 @@ const CompasModel = ({mapData, moveMap, setMoveCheck, setError, setLoading}) => 
     };
 
     useEffect(() => {
-        fetchDatas();
+        if (moveMap !== mapData.map_code) {
+            fetchDatas();
+        }
     }, [moveMap]);
 }
 

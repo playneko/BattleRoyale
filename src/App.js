@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
@@ -70,7 +70,6 @@ const colorTheme = createMuiTheme({
 });
 
 function App() {
-  let history = useHistory();
   const classes = useStyles();
   const [error, setError] = React.useState(null);
   const [account, setAccount] = React.useState({
@@ -86,11 +85,6 @@ function App() {
 
   // 로그인 유무 취득
   SessionModel(isLogin, setAccount, setError);
-
-  // 세션 취득 에러가 발생했을 경우
-  if (error != null && error === true) {
-    history.push("/");
-  }
 
   // 로그인 유무를 체크후 헤더에 넘겨주기
   const handleOnLoginout = (e) => {
@@ -116,6 +110,9 @@ function App() {
           <div className={classes.drawerHeader} />
           <Typography paragraph>
             <Switch>
+            {
+              error != null && error === true ? <Route path="*" render={() => <NotFound />} /> : ""
+            }
             {
               account.auth ? <Route exact path="/" render={() => <NotFound />} /> : ""
             }

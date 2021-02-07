@@ -179,6 +179,18 @@ const MapRender = (props) => {
       <div className="field-map">
         <canvas className="field-map_view" id="map" />
       </div>
+      {
+        !IsEmpty(mapData.map_comment) ?
+          <div className="field-map_content">
+            {/* {mapData.map_comment.replace('\r\n', '</br>').replace('\n', '</br>')} */}
+            {
+              mapData.map_comment.split('\n').map((line) => {
+                return (<span>{line}<br/></span>)
+              })
+            }
+          </div>
+        : ""
+      }
     </>
   );
 }
@@ -196,6 +208,8 @@ const Field = (props) => {
   const [error, setError] = React.useState(null);
   // 로딩
   const [loading, setLoading] = React.useState(false);
+  // 맵 내용 출력
+  const [printText, setPrintText] = React.useState("");
   // 이동 처리 체크
   const [moveCheck, setMoveCheck] = React.useState(!IsEmpty(mapData) && !IsEmpty(mapData.data) ? mapData.data.map_code : "");
 
@@ -205,7 +219,7 @@ const Field = (props) => {
   MapModel({moveCheck, character, reload, setMapData, setError, setLoading});
 
   return (
-    <div className="home-list">
+    <div className="field-map_main">
       { !IsEmpty(error) ? <Alert severity="error" reload={reload} setReload={setReload}>{error.msg != null ? error.msg : "데이터 취득중 에러가 발생했습니다."}</Alert> : "" }
       { !IsEmpty(loading) && loading === true ? <CircularProgress disableShrink className="progress" /> : "" }
       {
