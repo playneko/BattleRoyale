@@ -68,10 +68,10 @@ const Footer = (props) => {
   return (
     <>
       <List component="nav" className="field-map_footer">
-      { compasButton(1, mapData.move_east, "동쪽으로 이동하기", setMoveMap) }
-      { compasButton(2, mapData.move_west, "서쪽으로 이동하기", setMoveMap) }
-      { compasButton(4, mapData.move_north, "북쪽으로 이동하기", setMoveMap) }
-      { compasButton(3, mapData.move_south, "남쪽으로 이동하기", setMoveMap) }
+      { mapData.east_prohibition_area != null && mapData.east_prohibition_area < 1 ? compasButton(1, mapData.move_east, "동쪽으로 이동하기", setMoveMap) : "" }
+      { mapData.west_prohibition_area != null && mapData.west_prohibition_area < 1 ? compasButton(2, mapData.move_west, "서쪽으로 이동하기", setMoveMap) : "" }
+      { mapData.north_prohibition_area != null && mapData.north_prohibition_area < 1 ? compasButton(4, mapData.move_north, "북쪽으로 이동하기", setMoveMap) : "" }
+      { mapData.south_prohibition_area != null && mapData.south_prohibition_area < 1 ? compasButton(3, mapData.move_south, "남쪽으로 이동하기", setMoveMap) : "" }
       { mapData.prohibition_area < 1 ? ListItemButton(1, "탐색하기") : "" }
       { mapData.prohibition_area < 1 ? ListItemButton(2, "소지품") : "" }
       </List>

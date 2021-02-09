@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // 컴포넌트
 // 공통 처리
 import IsEmpty from "../common/IsEmpty";
+import Counter from "../common/Counter";
 // 로그인 체크
 import CheckLogin from "../CheckLogin";
 // 하단
@@ -213,6 +214,10 @@ const Field = (props) => {
   // 이동 처리 체크
   const [moveCheck, setMoveCheck] = React.useState(!IsEmpty(mapData) && !IsEmpty(mapData.data) ? mapData.data.map_code : "");
 
+  // 한곳에 머무는 시간 체크
+  Counter(moveCheck, reload);
+
+  // 로그인 체크
   CheckLogin(account, 3);
 
   // 캐릭터와 필드정보 취득
