@@ -3,10 +3,10 @@ const mysql = require('mysql');
 
 // mysql 커넥션 생성
 const dbCon = mysql.createConnection({
-    host: "10.0.1.27",
+    host: "localhost",
     port: 3306,
-    user: "playneko",
-    password: "tjqtjqgo4781",
+    user: "userid",
+    password: "password",
     database: "akibatv_cocoa"
 });
 
